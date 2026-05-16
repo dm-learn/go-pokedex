@@ -4,8 +4,14 @@ import (
 	"strings"
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 )
+
+var config = commandConfig{
+	Next: "https://pokeapi.co/api/v2/location-area/",
+	Previous: "",
+}
 
 
 func runRepl() {
@@ -28,9 +34,9 @@ func runRepl() {
 			continue
 		}
 
-		err := command.callback()
+		err := command.callback(&config)
 		if err != nil {
-			fmt.Errorf("Command error: %v", err)
+			log.Fatal(err)
 		}
 	}
 }

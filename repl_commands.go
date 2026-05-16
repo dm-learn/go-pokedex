@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/dm-learn/go-pokedex/apidata"
 )
 
 type cliCommand struct {
@@ -30,8 +32,13 @@ func getValidCommands() map[string]cliCommand {
 		},
 		"map": {
 			name: "map",
-			description: "Displays a list of 20 location areas. Successive calls will get the next set of areas.",
-			callback: mapAreas,
+			description: "Display a list of next 20 location areas.",
+			callback: nextAreas,
+		},
+		"mapb": {
+			name: "mapb",
+			description: "Display a list of 20 previous location areas.",
+			callback: previousAreas,
 		},
 	}
 }
@@ -51,6 +58,37 @@ func helpFunc(config *commandConfig) error {
 	return nil
 }
 
-func mapAreas(config *commandConfig) error {
+func nextAreas(config *commandConfig) error {
+	locationAreas, err := apidata.GetLocationAreas(config.Next)
+	if err != nil {
+		return err
+	}
+
+	config.Next = locationAreas.Next
+	config.Previous = locationAreas.Previous
+	for _, area := range locationAreas.Results {
+		fmt.Println(area.Name)
+	}
+
+	return nil
+}
+
+func previousAreas(config *commandConfig) error {
+	if config.Previous == "" {
+		fmt.Println("you're on the first page")
+		return nil
+	}
+
+	locationAreas, err := apidata.GetLocationAreas(config.Previous)
+	if err != nil {
+		return err
+	}
+
+	config.Next = locationAreas.Next
+	config.Previous = locationAreas.Previous
+	for _, area := range locationAreas.Results {
+		fmt.Println(area.Name)
+	}
+
 	return nil
 }
