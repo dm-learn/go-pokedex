@@ -1,4 +1,4 @@
-package apidata
+package pokeapi
 
 import (
 	"io"
