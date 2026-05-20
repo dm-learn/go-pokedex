@@ -4,7 +4,6 @@ import (
 	"strings"
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 )
 
@@ -36,7 +35,7 @@ func runRepl() {
 
 		err := command.callback(&config)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
 		}
 	}
 }

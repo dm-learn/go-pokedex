@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dm-learn/go-pokedex/apidata"
+	"github.com/dm-learn/go-pokedex/internal/pokeapi"
 )
 
 type cliCommand struct {
