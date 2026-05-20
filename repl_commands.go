@@ -51,7 +51,8 @@ func exitRepl(config *commandConfig) error {
 
 func helpFunc(config *commandConfig) error {
 	fmt.Println("Welcome to the Pokedex!")
-	fmt.Println("Usage:\n")
+	fmt.Println("Usage:")
+	fmt.Println()
 	for commandName, command := range getValidCommands() {
 		fmt.Printf("%s: %s\n", commandName, command.description)
 	}
