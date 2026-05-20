@@ -41,6 +41,20 @@ func TestCacheAddGet(t *testing.T) {
 	}
 }
 
-// func TestCacheReapLoop(t *testing.T) {
+func TestCacheReapLoop(t *testing.T) {
+	cache := NewCache(5 * time.Millisecond)
+	cache.Add("first", []byte("data"))
+	time.Sleep(10 * time.Millisecond)
+	_, ok := cache.Get("first")
+	if ok {
+		t.Errorf("Expected \"first\" key to get cleaned up.")
+		return
+	}
 
-// }
+	cache.Add("next", []byte("moredata"))
+	_, ok = cache.Get("next")
+	if !ok {
+		t.Errorf("Expected \"next\" key to be present.")
+		return
+	}
+}

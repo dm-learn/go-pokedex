@@ -5,10 +5,11 @@ import (
 	"sync"
 )
 
-func NewCache(interval time.Duration) Cache {
-	return Cache {
-		cache: map[string]cacheEntry{},
-		interval: interval,
+func NewCache(interval time.Duration) *Cache {
+	newCache := &Cache {
+		entries: map[string]cacheEntry{},
 		mu: &sync.Mutex{},
 	}
+	go newCache.reapLoop(interval)
+	return newCache
 }
