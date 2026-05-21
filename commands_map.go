@@ -6,7 +6,7 @@ import (
 	"github.com/dm-learn/go-pokedex/internal/pokeapi"
 )
 
-func nextAreas(config *commandConfig) error {
+func nextAreas(config *commandConfig, args ...string) error {
 	locationAreas, err := pokeapi.GetLocationAreas(config.Next)
 	if err != nil {
 		return err
@@ -21,7 +21,7 @@ func nextAreas(config *commandConfig) error {
 	return nil
 }
 
-func previousAreas(config *commandConfig) error {
+func previousAreas(config *commandConfig, args ...string) error {
 	if config.Previous == "" {
 		fmt.Println("you're on the first page")
 		return nil

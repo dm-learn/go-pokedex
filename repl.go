@@ -33,7 +33,11 @@ func runRepl() {
 			continue
 		}
 
-		err := command.callback(&config)
+		args := []string{}
+		if len(words) > 1 {
+			args = words[1:]
+		}
+		err := command.callback(&config, args...)
 		if err != nil {
 			fmt.Println(err)
 		}

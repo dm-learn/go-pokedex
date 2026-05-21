@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func exitRepl(config *commandConfig) error {
+func exitRepl(config *commandConfig, args ...string) error {
 	fmt.Println("Closing the Pokedex... Goodbye!")
 	os.Exit(0)
 	return nil
@@ -33,10 +33,15 @@ func getValidCommands() map[string]cliCommand {
 			description: "Display a list of 20 previous location areas.",
 			callback: previousAreas,
 		},
+		"explore": {
+			name: "explore <location_area_name>",
+			description: "Given a location_area_name, display all pokemon that can be found there.",
+			callback: exploreArea,
+		},
 	}
 }
 
-func helpFunc(config *commandConfig) error {
+func helpFunc(config *commandConfig, args ...string) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	fmt.Println()
