@@ -5,13 +5,15 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/dm-learn/go-pokedex/internal/pokeapi"
 )
 
 var config = commandConfig{
 	Next: "https://pokeapi.co/api/v2/location-area/",
 	Previous: "",
+	Pokedex: map[string]pokeapi.Pokemon{},
 }
-
 
 func runRepl() {
 	validCommands := getValidCommands()
