@@ -45,8 +45,13 @@ func getValidCommands() map[string]cliCommand {
 		},
 		"inspect": {
 			name:        "inspect <pokemon_name>",
-			description: "Display information about the pokemon if it has been caught",
+			description: "Display information about the pokemon if it has been caught.",
 			callback:    inspectPokemon,
+		},
+		"pokedex": {
+			name: "pokedex",
+			description: "List all of the pokemon you have caught.",
+			callback: listPokedex,
 		},
 	}
 }

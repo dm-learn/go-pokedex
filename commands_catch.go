@@ -38,6 +38,7 @@ func catchPokemon(config *commandConfig, args ...string) error {
 	roll := rand.Intn(pokemon.BaseExperience)
 	if roll < catchThreshold {
 		fmt.Printf("%s was caught!\n", pokemon.Name)
+		fmt.Println("You may now inspect it with the inspect command.")
 		config.Pokedex[pokemon.Name] = pokemon
 	} else {
 		fmt.Printf("%s escaped!\n", pokemon.Name)
