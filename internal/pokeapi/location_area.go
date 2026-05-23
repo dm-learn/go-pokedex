@@ -6,16 +6,6 @@ import (
 	"encoding/json"
 )
 
-type areasResponse struct {
-	Count    int    `json:"count"`
-	Next     string `json:"next"`
-	Previous string `json:"previous"`
-	Results  []struct {
-		Name string `json:"name"`
-		URL  string `json:"url"`
-	} `json:"results"`
-}
-
 func GetLocationAreas(url string) (areasResponse, error) {
 	res, err := http.Get(url)
 	if err != nil {
