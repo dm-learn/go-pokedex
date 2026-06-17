@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"math"
@@ -28,7 +29,21 @@ func catchPokemon(config *commandConfig, args ...string) error {
 	}
 	pokemonName := args[0]
 
-	pokemon, err := pokeapi.GetPokemon(pokemonName)
+	pokemonData, ok := config.APICache.Get(pokemonName)
+	var pokemon pokeapi.Pokemon
+	var err error
+
+	if ok {
+		fmt.Println("Cache hit!")
+		err = json.Unmarshal(pokemonData, &pokemon)
+	} else {
+		pokemon, err = pokeapi.GetPokemon(pokemonName)
+		if err != nil {
+			return err
+		}
+		pokemonData, err = json.Marshal(pokemon)
+		config.APICache.Add(pokemon.Name, pokemonData)
+	}
 	if err != nil {
 		return err
 	}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/dm-learn/go-pokedex/internal/pokeapi"
+	"github.com/dm-learn/go-pokedex/internal/pokecache"
 )
 
 type cliCommand struct {
@@ -15,4 +16,5 @@ type commandConfig struct {
 	Next string
 	Previous string
 	Pokedex map[string]pokeapi.Pokemon
+	APICache *pokecache.Cache
 }
